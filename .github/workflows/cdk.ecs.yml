@@ -8,8 +8,8 @@ on:
         description: 원하는 작업을 선택하세요.
         required: true
         options:
-          - deploy
-          - destroy
+          - 'deploy'
+          - 'destroy'
 
 jobs:
   synth-and-deploy-or-destroy:
@@ -42,11 +42,11 @@ jobs:
       run: npm run bootstrap
 
 
-    - if: ${{ github.event.input.Select-Job == deploy }}
+    - if: ${{ github.event.input.Select-Job == 'deploy' }}
       name: ECS Deploy      
       run: npm run deploy
 
-    - if: ${{ github.event.input.Select-Job == destroy }}
+    - if: ${{ github.event.input.Select-Job == 'destroy' }}
       name: ECS Destroy   
       run: npm run destroy
       
