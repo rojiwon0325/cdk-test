@@ -7,7 +7,7 @@ import { CdkStack } from "../lib/cdk-stack";
 const app = new App();
 new CdkStack(app, "CdkStack", {
   env: {
-    account: process.env.CDK_ACCOUNT,
-    region: process.env.CDK_DEFAULT_REGION,
+    account: process.env.AWS_ACCOUNT,
+    region: process.env.AWS_DEFAULT_REGION,
   },
 });
