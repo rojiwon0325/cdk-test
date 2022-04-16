@@ -1,4 +1,4 @@
-name: ECS DEPLOY
+name: ECS DESTROY
 
 on:
   workflow_dispatch:
