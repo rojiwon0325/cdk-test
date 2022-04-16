@@ -4,5 +4,9 @@
     "ap-northeast-2b",
     "ap-northeast-2c",
     "ap-northeast-2d"
-  ]
+  ],
+  "hosted-zone:account=213739790465:domainName=goormedu-clone.com:region=ap-northeast-2": {
+    "Id": "/hostedzone/Z0883160NDCTUMR7R5BU",
+    "Name": "goormedu-clone.com."
+  }
 }
