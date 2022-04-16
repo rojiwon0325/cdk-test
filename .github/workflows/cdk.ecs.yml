@@ -46,7 +46,7 @@ jobs:
       name: ECS Deploy      
       run: npm run deploy
 
-    - if: ${{ github.event.inputs.task == "destroy" }}
+    - if: ${{ github.event.inputs.task == 'destroy' }}
       name: ECS Destroy   
       run: npm run destroy
       
