@@ -9,7 +9,9 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "deploy":"cdk deploy CdkStack --require-approval never"
+    "deploy":"cdk deploy CdkStack --require-approval never",
+    "destroy":"cdk destroy CdkStack -f",
+    "bootstrap":"cdk bootstrap"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

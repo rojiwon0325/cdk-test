@@ -29,8 +29,8 @@ jobs:
     - name: Cdk Bootstrap
       run: npm run bootstrap
 
-    - name: ECS Deploy      
-      run: npm run deploy
+    - name: ECS Destroy
+      run: npm run destroy
       env:
         AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
