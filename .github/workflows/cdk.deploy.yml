@@ -7,6 +7,11 @@ jobs:
   synth-and-deploy:
     runs-on: ubuntu-latest
     environment: production
+    env:
+      AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+      AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
+      DOMAIN: ${{ secrets.AWS_DOMAIN }}
+      SUB_OF_DOMAIN: ${{ secrets.AWS_SUB_OF_DOMAIN }}
 
     strategy:
       matrix:
