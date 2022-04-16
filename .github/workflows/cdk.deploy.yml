@@ -1,0 +1,32 @@
+name: CDK DEPLOY
+
+on:
+  workflow_dispatch:
+
+jobs:
+  synth-and-deploy:
+    runs-on: ubuntu-latest
+    environment: production
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: npm install
+      run: npm install
+
+    - name: Cdk Deploy
+      run: npm run cdk deploy --profile
+      env:
+        CDK_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+        CDK_REGION: ${{ secrets.AWS_REGION }}
