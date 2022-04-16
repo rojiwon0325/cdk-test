@@ -26,7 +26,7 @@ jobs:
       run: npm install
 
     - name: Cdk Deploy
-      run: npm run cdk deploy --profile
+      run: npm run deploy
       env:
         CDK_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
         CDK_REGION: ${{ secrets.AWS_REGION }}
