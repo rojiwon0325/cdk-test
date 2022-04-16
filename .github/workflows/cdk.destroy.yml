@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  synth-and-deploy:
+  synth-destroy:
     runs-on: ubuntu-latest
     environment: production
 
