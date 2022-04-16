@@ -8,6 +8,6 @@ const app = new App();
 new CdkStack(app, "CdkStack", {
   env: {
     account: process.env.CDK_ACCOUNT,
-    region: process.env.CDK_REGION,
+    region: process.env.CDK_DEFAULT_REGION,
   },
 });
