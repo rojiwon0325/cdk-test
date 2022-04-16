@@ -13,7 +13,7 @@ export class CdkStack extends Stack {
     const LoadBalancedFargateService =
       new aws_ecs_patterns.ApplicationLoadBalancedFargateService(
         this,
-        "rojiwon-cdd-service",
+        "rojiwon-cdk-service",
         {
           cluster,
           desiredCount: 2,
