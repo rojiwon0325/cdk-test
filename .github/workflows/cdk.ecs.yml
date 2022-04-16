@@ -3,7 +3,7 @@ name: ECS DEPLOY OR DESTROY
 on:
   workflow_dispatch:
     inputs:
-      Select-Job:
+      task:
         type: choice
         description: 원하는 작업을 선택하세요.
         required: true
@@ -42,11 +42,11 @@ jobs:
       run: npm run bootstrap
 
 
-    - if: ${{ github.event.input.Select-Job == 'deploy' }}
+    - if: ${{ github.event.inputs.task == 'deploy' }}
       name: ECS Deploy      
       run: npm run deploy
 
-    - if: ${{ github.event.input.Select-Job == 'destroy' }}
+    - if: ${{ github.event.inputs.task == "destroy" }}
       name: ECS Destroy   
       run: npm run destroy
       
