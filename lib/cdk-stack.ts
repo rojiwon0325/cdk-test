@@ -33,7 +33,7 @@ export class CdkStack extends Stack {
         domainZone: hostzone,
         domainName: config.SubDomain,
         cluster,
-        desiredCount: 3,
+        desiredCount: 2,
         memoryLimitMiB: 1024,
         taskImageOptions: {
           image: aws_ecs.ContainerImage.fromRegistry(
