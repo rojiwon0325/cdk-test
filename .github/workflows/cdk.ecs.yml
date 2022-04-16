@@ -42,11 +42,11 @@ jobs:
       run: npm run bootstrap
 
 
-    - if: ${{ github.event.input.Select-Job == "deploy" }}
+    - if: ${{ github.event.input.Select-Job == deploy }}
       name: ECS Deploy      
       run: npm run deploy
 
-    - if: ${{ github.event.input.Select-Job == "destroy" }}
+    - if: ${{ github.event.input.Select-Job == destroy }}
       name: ECS Destroy   
       run: npm run destroy
       
