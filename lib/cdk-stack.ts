@@ -1,5 +1,6 @@
 import "dotenv/config";
 import {
+  aws_certificatemanager,
   aws_ecs,
   aws_ecs_patterns,
   aws_route53,
@@ -9,6 +10,7 @@ import {
 import { Vpc } from "aws-cdk-lib/aws-ec2";
 import { Cluster } from "aws-cdk-lib/aws-ecs";
 import { Construct } from "constructs";
+import { ApplicationProtocol } from "aws-cdk-lib/aws-elasticloadbalancingv2";
 
 export class CdkStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -25,26 +27,40 @@ export class CdkStack extends Stack {
       domainName: config.Domain,
     });
 
-    // const LoadBalancedFargateService =
-    new aws_ecs_patterns.ApplicationLoadBalancedFargateService(
+    const certificate = new aws_certificatemanager.Certificate(
       this,
-      "rojiwon-cdk-service",
+      "Certificate",
       {
-        domainZone: hostzone,
         domainName: config.SubDomain,
-        cluster,
-        desiredCount: 2,
-        memoryLimitMiB: 1024,
-        taskImageOptions: {
-          image: aws_ecs.ContainerImage.fromRegistry(
-            "amazon/amazon-ecs-sample"
-          ),
-          environment: {
-            // TEST_ENVIRONMENT_VARIABLE1: "test environment variable 1 value",
-            // TEST_ENVIRONMENT_VARIABLE2: "test environment variable 2 value",
-          },
-        },
+        validation:
+          aws_certificatemanager.CertificateValidation.fromDns(hostzone),
       }
     );
+
+    const LoadBalancedFargateService =
+      new aws_ecs_patterns.ApplicationLoadBalancedFargateService(
+        this,
+        "rojiwon-cdk-service",
+        {
+          redirectHTTP: true,
+          protocol: ApplicationProtocol.HTTPS,
+          targetProtocol: ApplicationProtocol.HTTP,
+          domainZone: hostzone,
+          domainName: config.SubDomain,
+          cluster,
+          certificate,
+          desiredCount: 2,
+          memoryLimitMiB: 1024,
+          taskImageOptions: {
+            image: aws_ecs.ContainerImage.fromRegistry(
+              "amazon/amazon-ecs-sample"
+            ),
+            environment: {
+              // TEST_ENVIRONMENT_VARIABLE1: "test environment variable 1 value",
+              // TEST_ENVIRONMENT_VARIABLE2: "test environment variable 2 value",
+            },
+          },
+        }
+      );
   }
 }
